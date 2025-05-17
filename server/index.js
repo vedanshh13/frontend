@@ -33,12 +33,10 @@ app.use(
 		credentials: true,
 	})
 );
-app.use(
-	fileUpload({
-		useTempFiles: true,
-		tempFileDir: "/tmp/",
-	})
-);
+app.use(cors({
+  origin: "https://studynotion-frontend-weld-kappa.vercel.app",
+  credentials: true
+}));
 
 // Connecting to cloudinary
 cloudinaryConnect();
