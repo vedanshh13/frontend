@@ -1,42 +1,37 @@
 // Importing necessary modules and packages
-require('dotenv').config()
-// other imports here
-
+require('dotenv').config();
 const express = require("express");
 const app = express();
+
 const userRoutes = require("./routes/user");
 const profileRoutes = require("./routes/profile");
 const courseRoutes = require("./routes/Course");
 const paymentRoutes = require("./routes/Payments");
 const contactUsRoute = require("./routes/Contact");
+
 const database = require("./config/database");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const { cloudinaryConnect } = require("./config/cloudinary");
 const fileUpload = require("express-fileupload");
 
-
 // Setting up port number
 const PORT = process.env.PORT || 4000;
 
-
-
 // Connecting to database
 database.connect();
- 
-// Middlewares
+
+// Middleware
 app.use(express.json());
 app.use(cookieParser());
+
 app.use(
-	cors({
-		origin: "*",
-		credentials: true,
-	})
+  cors({
+    origin: "https://studynotion-frontend-weld-kappa.vercel.app",
+    credentials: true,
+  })
 );
-app.use(cors({
-  origin: "https://studynotion-frontend-weld-kappa.vercel.app",
-  credentials: true
-}));
+app.options("*", cors()); // Handle preflight requests
 
 // Connecting to cloudinary
 cloudinaryConnect();
@@ -50,15 +45,15 @@ app.use("/api/v1/reach", contactUsRoute);
 
 // Testing the server
 app.get("/", (req, res) => {
-	return res.json({
-		success: true,
-		message: "Your server is up and running ...",
-	});
+  return res.json({
+    success: true,
+    message: "Your server is up and running ...",
+  });
 });
 
 // Listening to the server
 app.listen(PORT, () => {
-	console.log(`App is listening at ${PORT}`);
+  console.log(`App is listening at ${PORT}`);
 });
 
 // End of code.
