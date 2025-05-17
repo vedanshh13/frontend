@@ -27,7 +27,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://studynotion-frontend-weld-kappa.vercel.app",
+      origin: "https://studynotion-frontend-kyron4s0w-vedanshs-projects-66596565.vercel.app",
     credentials: true,
   })
 );
